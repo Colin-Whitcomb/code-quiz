@@ -3,10 +3,11 @@ var startButtonEl = document.getElementById("start-btn")
 var questionContainerEl = document.getElementById("question-container")
 var questionEl = document.getElementById("question")
 var answerButtonsEl = document.getElementById("answer-buttons")
-var nextButton = document.getElementById("start-btn")
+// var nextButton = document.getElementById("start-btn")
 
 // going to default to underfined
-var shuffledQuestions, currentQuestionIndex
+var shuffledQuestions ;
+var currentQuestionIndex = 0;
 
 // I'll need the following work to be done once user chooses answer: 
 // nextButton.addEventListener("click", () => {
@@ -20,7 +21,7 @@ function startGame() {
     console.log("Game has started");
     // hide the start button
     startButtonEl.classList.add("hide");
-    // choose from the array of questions randomly
+    // sorts the questions in the array and pushes them into shuffledQuestions
     shuffledQuestions = questions.sort(() => Math.random() - 0.5);
     // set the current index to zero
     currentQuestionIndex = 0;
@@ -58,9 +59,10 @@ function showQuestion(question) {
         // turns answers into buttons
         button.classList.add("btn");
 
-        // if (answer.correct) {
-        //     button.dataset.correct = answer.correct;
-        // }
+        // checking to see if answer is correct
+        if (answer.correct) {
+            button.dataset.correct = answer.correct;
+        }
 
         // listens for user to click the answer buttons 
         button.addEventListener("click", selectAnswer);
@@ -124,30 +126,30 @@ var questions = [{
             correct: false
         }
     ]
-},
-{
-    question: "What is 4+4?",
-    answers: [{
-            text: "12",
-            correct: true
-        },
-        {
-            text: "6",
-            correct: false
-        },
-        {
-            text: "44",
-            correct: false
-        },
-        {
-            text: "4",
-            correct: false
-        }
-    ]
 }]
+// {
+//     question: "What is 4+4?",
+//     answers: [{
+//             text: "12",
+//             correct: true
+//         },
+//         {
+//             text: "6",
+//             correct: false
+//         },
+//         {
+//             text: "44",
+//             correct: false
+//         },
+//         {
+//             text: "4",
+//             correct: false
+//         }
+//     ]
+// }]
 
 
-
+startButtonEl.addEventListener("click", startGame)
 
 
 
@@ -170,6 +172,3 @@ var questions = [{
 // High Scores: 
 //      1) Show IF clicked submit button OR by clicking "View Highschore"
 //      2) "View High Score" needs to be visible on screen. 
-
-
-startButtonEl.addEventListener("click", startGame)
