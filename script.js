@@ -3,6 +3,7 @@ var startButtonEl = document.getElementById("start-btn")
 var questionContainerEl = document.getElementById("question-container")
 var questionEl = document.getElementById("question")
 var answerButtonsEl = document.getElementById("answer-buttons")
+var openingHeaderEl = document.getElementById("welcome!")
 // var nextButton = document.getElementById("start-btn")
 
 // going to default to underfined
@@ -19,6 +20,8 @@ var currentQuestionIndex = 0;
 function startGame() {
     // check to see if the function has been called
     console.log("Game has started");
+    // hide the Welcome to the Code Quiz hw
+    openingHeaderEl.classList.add("hide,");
     // hide the start button
     startButtonEl.classList.add("hide");
     // sorts the questions in the array and pushes them into shuffledQuestions
@@ -64,24 +67,31 @@ function showQuestion(question) {
             button.dataset.correct = answer.correct;
         }
 
-        // listens for user to click the answer buttons 
+        // listens for user to click the start button
+        // begins the selectAnswer function
         button.addEventListener("click", selectAnswer);
-        // appends button into answer buttons elemts
+        // appends button into answer buttons elements
         answerButtonsEl.appendChild(button);
     })
 
 }
 
-//  
+//  function once answer is selected
 function selectAnswer(event) {
+    // checking when selectAnswer starts
+    console.log("Answer has been selected");
+    // setting variable for which button is clicked
     var selectedButton = event.target;
+    // determines whether or not the selected button is correct
     var correct = selectedButton.dataset.correct;
+    // call the setStatusClass 
     setStatusClass(document.body, correct);
     Array.from(answerButtonsEl.children).forEach(button => {
         setStatusClass(button, button.dataset.correct);
         currentQuestionIndex++;
         sendNextQuestion();
     })
+
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
         nextButton.classList.remove("hide");
     } else {
