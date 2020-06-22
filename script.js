@@ -53,7 +53,7 @@ function startGame() {
     // set timer to max time
     questionIndex = 0;
     score = 0;
-    setTimeout(fillInLater, 1000 *2)
+    setInterval(updateTimer, 1000);
     showQuestion();
 
 }
@@ -103,10 +103,18 @@ showQuestion();
 // add if (last question) - go to submit initials page. 
 }
 
-// Timer function 
-var myTimer;
-   function fillInLater () {
+// // total seconds in game
+let time = 45;
+
+//Timer function 
+
+   function updateTimer() {
        console.log("Time has begun");
+    // let seconds =;
+
+    counterNum.innerHTML = time;
+       time--;
+
    }
 
 startButtonEl.addEventListener("click", startGame);
