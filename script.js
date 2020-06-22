@@ -4,6 +4,7 @@ var questionContainerEl = document.getElementById("question-container")
 var questionEl = document.getElementById("question")
 var answerButtonsEl = document.getElementById("answer-buttons")
 var openingHeaderEl = document.getElementById("welcome-div")
+// var buttonA = document.getElementById("button-a")
 // var nextButton = document.getElementById("start-btn")
 
 // going to default to underfined
@@ -20,18 +21,34 @@ var currentQuestionIndex = 0;
 function startGame() {
     // check to see if the function has been called
     console.log("Game has started");
-    // hide the Welcome to the Code Quiz hw
-    openingHeaderEl.classList.add("hide,");
+    // hide the Welcome to the Code Quiz 
+    // display none takes out the empty space 
+    openingHeaderEl.style.display = "none";
     // hide the start button
     startButtonEl.classList.add("hide");
     // sorts the questions in the array and pushes them into shuffledQuestions
-    shuffledQuestions = questions.sort(() => Math.random() - 0.5);
+    // shuffledQuestions = questionsArr.sort(() => Math.random() - 0.5);
     // set the current index to zero
-    currentQuestionIndex = 0;
+    // currentQuestionIndex = 0;
     // show the question element
     questionContainerEl.classList.remove("hide");
     // call the sendNextQuestion function
+    shuffleArr();
     sendNextQuestion();
+}
+
+// function to shuffle questionsArr 
+function shuffleArr(questionsArr) {
+    var m = array.length,
+        t, i;
+    while (m) {
+        i = Math.floor(Math.random() * m--);
+        t = array[m];
+        array[m] = array[i];
+        array[i] = t;
+    }
+    console.log("HI");
+    return questionsArr;
 }
 
 // sequences through next questions
@@ -41,22 +58,22 @@ function sendNextQuestion() {
     // call the resetState function
     resetState();
     // call the showQuestion function
-    showQuestion(shuffledQuestions[currentQuestionIndex]);
+    showQuestion(questionsArr);
 }
 
 // removes answer
-function resetState() {
-    while (answerButtonsEl.firstChild) {
-        answerButtonsEl.removeChild(answerButtonsEl.firstChild);
-    }
-}
+// function resetState() {
+// //     while (answerButtonsEl.firstChild) {
+// //         answerButtonsEl.removeChild(answerButtonsEl.firstChild);
+// //     }
+// // }
 
 // function that shows hidden questions and corresponding answers
-function showQuestion(question) {
+function showQuestion(questionsArr) {
     // writes the question line 
-    questionEl.innerText = question.question;
-
-    question.answers.forEach(answer => {
+    questionEl.innerText = questionsArr[i];
+    // for every answer on the question array...
+    questionArr.answers.forEach(answer => {
         // creates button element
         var button = document.createElement("button");
         // writes the answer text 
@@ -119,26 +136,22 @@ function clearStatusClass(element) {
 }
 
 // array of objects of questions 
-var questions = [{
+var questionsArr = [
+    {
     question: "What is 4+8?",
-    answers: [{
-            text: "8",
-            correct: true
-        },
-        {
-            text: "6",
-            correct: false
-        },
-        {
-            text: "44",
-            correct: false
-        },
-        {
-            text: "4",
-            correct: false
-        }
-    ]
-}]
+    options: ["8", "6", "12", "14", ],
+    answer: "12",
+},{
+    question: "What is 4+4?",
+    options: ["8", "4", "44", "14", ],
+    answer: "8",
+}
+]
+
+// Timer function 
+var myTimer;
+   function setTimeout () => {console.log("Yo!"); }, 1000 *3);
+
 // {
 //     question: "What is 4+4?",
 //     answers: [{
@@ -161,7 +174,7 @@ var questions = [{
 // }]
 
 
-startButtonEl.addEventListener("click", startGame)
+startButtonEl.addEventListener("click", startGame, clock)
 
 
 

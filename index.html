@@ -8,37 +8,42 @@
     <title>Quiz App </title>
 </head>
 
-<header>
-
-<div id="view-highscore" class="highscore"> 
-    <h3>View High Score
-    </h3>
-</div>
-
-<div id="timer" class="timer"> 
-    <h3>Timer #
-    </h3>
-</div>
-
-
-</header>
-
 <body>
+
+    <header>
+
+        <div id="view-highscore" class="highscore">
+            <h3>View High Score
+            </h3>
+        </div>
+
+        <div id="timer" class="timer">
+            <h3>Timer #
+            </h3>
+        </div>
+
+    </header>
+
     <div id="welcome-div" class="welcome">
-        <h1>Welcome to the Code Quiz!
-            <br>
-            Press Start to begin.
+        <h1>
+            Welcome to the Code Quiz!
         </h1>
+        <h2>
+            Press Start to begin.
+        </h2>
     </div>
 
     <div class="container col-2">
         <div id="question-container" class="hide">
-            <div id="question">Question</div>
+            <div id="question">
+                <h2>Question
+                </h2>
+            </div>
             <div id="answer-buttons" class="btn-grid">
-                <button class="btn">Answer 1</button>
-                <button class="btn">Answer 2</button>
-                <button class="btn">Answer 3</button>
-                <button class="btn">Answer 4</button>
+                <button class="btn" id="button-a">Answer 1</button>
+                <button class="btn" id="button-a">Answer 2</button>
+                <button class="btn" id="button-a">Answer 3</button>
+                <button class="btn" id="button-a">Answer 4</button>
             </div>
         </div>
         <div class="controls">
@@ -59,4 +64,5 @@
 </body>
 
 <script src="script.js"></script>
+
 </html>
