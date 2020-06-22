@@ -8,12 +8,6 @@ var counterNum = document.getElementById("counter-num")
 // var buttonA = document.getElementById("button-a")
 var nextButton = document.getElementById("next-btn")
 
-// I'll need the following work to be done once user chooses answer: 
-// nextButton.addEventListener("click", () => {
-//     currentQuestionIndex++;
-//     sendNextQuestion();
-// }
-
 var questionIndex;
 var score;
 
@@ -56,40 +50,12 @@ function startGame() {
     // show the question element
     questionContainerEl.classList.remove("hide");
     // call the sendNextQuestion function
-    // shuffleArr();
+    // set timer to max time
     questionIndex = 0;
     score = 0;
     setTimeout(fillInLater, 1000 *2)
     showQuestion();
-//     shuffleArr(questionsArr);
-// }
 
-// var shuffledArr = [];
-
-// // // function to shuffle questionsArr 
-// function shuffleArr(e) {
-//     console.log("Shuffled Arr was triggered");
-//     var currentIndex = array.length, temporaryValue, randomIndex;
-// // while there remain elements to shuffle...
-// while (0 !== currentIndex) {
-//     // Pick a remaining element... 
-//     randomIndex = Math.floor(Math.random() * currentIndex);
-//     currentIndex -= 1;
-//     // and swap it with a curent element.
-//     temporaryValue = array[currentIndex];
-//     array[currentIndex] = array[randomIndex];
-//     array[randomIndex] = temporaryValue;
-// }
-// return array;
-// }
-
-// // sequences through next questions
-// function sendNextQuestion() {
-//     // checking
-//     console.log("Sent next question");
-//     // call the showQuestion function
-//     // showQuestion(questionsArr);
-//     // shuffleArr(questionArr);
 }
 
 // function that shows hidden questions and corresponding answers
@@ -107,20 +73,7 @@ function showQuestion() {
         answerButtonsEl.children[i].addEventListener("click", selectAnswer);
         }
     }
-        // turns answers into buttons
-//         button.classList.add("btn");
-//         // checking to see if answer is correct
-//         if (answer.correct) {
-//             button.dataset.correct = answer.correct;
-//         }
-//         // listens for user to click the start button
-//         // begins the selectAnswer function
-//         button.addEventListener("click", selectAnswer());
-//         // appends button into answer buttons elements
-//         answerButtonsEl.appendChild(button);
-//     }
 
-// }
 
 //  function once answer is selected
 function selectAnswer(event) {
@@ -147,35 +100,8 @@ function nextQuestion () {
 questionIndex++;
 nextButton.classList.add("hide");
 showQuestion();
-// add if last question - go to submit initials 
-
+// add if (last question) - go to submit initials page. 
 }
-
-
-
-//     if (shuffledQuestions.length > currentQuestionIndex + 1) {
-//         nextButton.classList.remove("hide");
-//     } else {
-//         startButton.innerText = "Restart";
-//         startButton.classList.remove("hide");
-//     }
-// }
-
-// function setStatusClass(element, correct) {
-//     clearStatusClass(element);
-//     if (correct) {
-//         element.classList.add("correct");
-//         console.log("Correct!")
-//     } else {
-//         element.classList.add("wrong");
-//         console.log("Wrong!");
-//     }
-// }
-
-// function clearStatusClass(element) {
-//     element.classList.remove("correct");
-//     element.classList.remove("wrong");
-// }
 
 // Timer function 
 var myTimer;
