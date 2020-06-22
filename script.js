@@ -3,11 +3,11 @@ var startButtonEl = document.getElementById("start-btn")
 var questionContainerEl = document.getElementById("question-container")
 var questionEl = document.getElementById("question")
 var answerButtonsEl = document.getElementById("answer-buttons")
-var openingHeaderEl = document.getElementById("welcome!")
+var openingHeaderEl = document.getElementById("welcome-div")
 // var nextButton = document.getElementById("start-btn")
 
 // going to default to underfined
-var shuffledQuestions ;
+var shuffledQuestions;
 var currentQuestionIndex = 0;
 
 // I'll need the following work to be done once user chooses answer: 
@@ -36,6 +36,8 @@ function startGame() {
 
 // sequences through next questions
 function sendNextQuestion() {
+    // checking
+    console.log("Sent next question");
     // call the resetState function
     resetState();
     // call the showQuestion function
