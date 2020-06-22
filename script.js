@@ -4,12 +4,9 @@ var questionContainerEl = document.getElementById("question-container")
 var questionEl = document.getElementById("question")
 var answerButtonsEl = document.getElementById("answer-buttons")
 var openingHeaderEl = document.getElementById("welcome-div")
+var counterNum = document.getElementById("counter-num")
 // var buttonA = document.getElementById("button-a")
 // var nextButton = document.getElementById("start-btn")
-
-// going to default to underfined
-var shuffledQuestions;
-var currentQuestionIndex = 0;
 
 // I'll need the following work to be done once user chooses answer: 
 // nextButton.addEventListener("click", () => {
@@ -19,26 +16,34 @@ var currentQuestionIndex = 0;
 
 // function to strt game - called by clicking Start
 function startGame() {
+
     // check to see if the function has been called
     console.log("Game has started");
+
     // hide the Welcome to the Code Quiz 
     // display none takes out the empty space 
     openingHeaderEl.style.display = "none";
+
     // hide the start button
     startButtonEl.classList.add("hide");
-    // sorts the questions in the array and pushes them into shuffledQuestions
-    // shuffledQuestions = questionsArr.sort(() => Math.random() - 0.5);
-    // set the current index to zero
-    // currentQuestionIndex = 0;
+
+    // shows the count down #
+    counterNum.classList.remove("hide");
+
     // show the question element
     questionContainerEl.classList.remove("hide");
+
     // call the sendNextQuestion function
-    shuffleArr();
+    // shuffleArr();
     sendNextQuestion();
+    setTimeout(fillInLater, 1000 *2)
+    shuffleArr(questionArr);
+
 }
 
-// function to shuffle questionsArr 
-function shuffleArr(questionsArr) {
+// // function to shuffle questionsArr 
+function shuffleArr(shuffledArr) {
+    console.log("Shuffled Arr was triggered");
     var m = array.length,
         t, i;
     while (m) {
@@ -47,31 +52,26 @@ function shuffleArr(questionsArr) {
         array[m] = array[i];
         array[i] = t;
     }
-    console.log("HI");
-    return questionsArr;
+    return 
 }
+//points to shuffled array setting 
 
 // sequences through next questions
 function sendNextQuestion() {
     // checking
     console.log("Sent next question");
-    // call the resetState function
-    resetState();
     // call the showQuestion function
-    showQuestion(questionsArr);
+    // showQuestion(questionsArr);
+    // shuffleArr(questionArr);
 }
 
-// removes answer
-// function resetState() {
-// //     while (answerButtonsEl.firstChild) {
-// //         answerButtonsEl.removeChild(answerButtonsEl.firstChild);
-// //     }
-// // }
+
+
 
 // function that shows hidden questions and corresponding answers
-function showQuestion(questionsArr) {
+function showQuestion(shuffledArr) {
     // writes the question line 
-    questionEl.innerText = questionsArr[i];
+    questionEl.innerText = questionsArr;
     // for every answer on the question array...
     questionArr.answers.forEach(answer => {
         // creates button element
@@ -150,49 +150,18 @@ var questionsArr = [
 
 // Timer function 
 var myTimer;
-   function setTimeout () => {console.log("Yo!"); }, 1000 *3);
+   function fillInLater () {
+       console.log("Time has begun");
+   }
 
-// {
-//     question: "What is 4+4?",
-//     answers: [{
-//             text: "12",
-//             correct: true
-//         },
-//         {
-//             text: "6",
-//             correct: false
-//         },
-//         {
-//             text: "44",
-//             correct: false
-//         },
-//         {
-//             text: "4",
-//             correct: false
-//         }
-//     ]
-// }]
-
-
-startButtonEl.addEventListener("click", startGame, clock)
+startButtonEl.addEventListener("click", startGame,)
 
 
 
-// Timer:
-//    1) Count down from beginning
-//    2) Decrease if wrong answer 
-//    3) Display on screen 
-
-// View high score - click event 
-
-// For questions:
-//      1) Choose answer - click event 
-//      2) If correct - display "Correct!"
-//      3) If incorrect - display "Wrong!"
 
 // All done! 
 //     1) Enter Initials
-//      2) Submit button
+//     2) Submit button
 
 // High Scores: 
 //      1) Show IF clicked submit button OR by clicking "View Highschore"
