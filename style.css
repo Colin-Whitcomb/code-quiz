@@ -8,32 +8,39 @@
 /* Need to fix screen overlap on smallest size */
 header {
     padding: 0; 
-    padding-top: 5%;
-    padding-bottom: 3%;
+    padding-top: 0;
+    padding-bottom: 10%;
     margin: 0;
     display: flex;
+    width: 100vw;
+    height: 10%;
+    /* background-color: teal; */
+    
     
 }
 
 body {
-    padding: 0;
+    padding-bottom: 5%;
     margin: 0;
     display: flex;
     width: 100vw;
-    height: 40vh;
+    height: 100vh;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: column;    
+    background: rgb(74,73,246);
+    background: linear-gradient(31deg, rgba(74,73,246,1) 0%, rgba(21,9,121,0.9497607655502392) 44%, rgba(170,83,187,1) 100%);
+    color: white;
 }
 
-.container {
+/* .container {
     width: 800px;
-    max-width: 50%;
+    max-width: 50%; */
     /* background-color: lightblue; */
     /* border-radius: 5px; */
     /* padding: 10px;
     box-shadow: 0 0 10px 2px; */
-}
+/* } */
 
 .btn-grid {
     display: grid;
@@ -44,8 +51,8 @@ body {
 }
 
 .btn {
-    border: 1px solid purple;
-    background-color: purple;
+    border: 1px solid white;
+    background-color: rgb(40, 170, 159);
     color: white;
     border-radius: 5px;
     padding: 5px, 10px;
@@ -77,7 +84,7 @@ body {
     align-items: center;
     /* background-color: violet; */
     text-align: center; 
-    position: relative; right: 200%;
+    position: absolute; left: 10%;
 
 }
 
@@ -91,9 +98,9 @@ body {
     align-items: center; 
     /* background-color: violet; */
     text-align: center; 
-    position: relative; left: 400%;
-
+    position: absolute; right: 13%; 
 }
+
 .counter {
     padding: 0;
     margin: 0;
@@ -104,7 +111,7 @@ body {
     align-items: center; 
     /* background-color: violet; */
     text-align: center; 
-    position: relative; left: 430%;
+    position: absolute; right: 5%;
 
 
 }

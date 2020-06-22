@@ -35,7 +35,6 @@ let questionsArr = [
 //     answer: "8",
 }
 ]
-
 // function to strt game - called by clicking Start
 function startGame() {
     // check to see if the function has been called
