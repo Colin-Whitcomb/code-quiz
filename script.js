@@ -13,36 +13,28 @@ var input = document.getElementById("input")
 var endGameForm = document.getElementById("endGameForm")
 var hsArea = document.getElementById("hsArea")
 
+// global variables 
 var questionIndex;
 var score;
 var correct;
 var timerGlobal;
 var initials;
-console.log(highScoreArr);
-let producedHS = [];
+// console.log(highScoreArr);
+// let producedHS = [];
 
 
-if (localStorage.getItem(highScoreArr) || JSON.parse(localStorage.getItem(highScoreArr).length === 0)) {
-let highScoreArr = [];
-} else {
+// if (localStorage.getItem(highScoreArr) || JSON.parse(localStorage.getItem(highScoreArr).length === 0)) {
+// let highScoreArr = [];
+// } else {
     
-}
+// }
 
 // function to strt game - called by clicking Start
 function startGame() {
-    // check to see if the function has been called
-    // console.log("Game has started");
-    // hide the Welcome to the Code Quiz 
-    // display none takes out the empty space 
     openingHeaderEl.style.display = "none";
-    // hide the start button
     startButtonEl.classList.add("hide");
-    // shows the count down #
     counterNum.classList.remove("hide");
-    // show the question element
     questionContainerEl.classList.remove("hide");
-    // call the sendNextQuestion function
-    // set timer to max time
     questionIndex = 0;
     score = 0;
     timerGlobal = setInterval(updateTimer, 1000);
@@ -52,41 +44,29 @@ function startGame() {
 
 // function that shows hidden questions and corresponding answers
 function showQuestion() {
-    // writes the question line 
     questionEl.textContent = questionsArr[questionIndex].question;
-    // writes the answer text 
     var answers = questionsArr[questionIndex].options;
-    // for every answer on the question array...
     for (var i = 0; i < answers.length; i++) {
-        // write that text content 
         answerButtonsEl.children[i].textContent = answers[i];
-        // listen for a click, then run selectAnswer
         answerButtonsEl.children[i].addEventListener("click", selectAnswer);
     }
 }
 
 //  function once answer is selected
 function selectAnswer(event) {
-    // checking when selectAnswer starts
-    // console.log("Answer has been selected");
-    // setting variable for which button is clicked
     var selectedButton = event.target.innerText;
     console.log(selectedButton);
-
     // determines whether or not the selected button is correct
     var correct = questionsArr[questionIndex].answer;
 
     if (selectedButton === correct) {
         score++; // make sure only one right answer per attempt
         console.log("This is the score" + score);
-        // document.textContent = displays "Correct!"
         corrWrongEl.classList.remove("hide");
         corrWrongEl.children[0].textContent = "Correct!";
 
     } else {
-        // changes text from "Correct!" to "Wrong!"
         corrWrongEl.children[0].textContent = "Wrong!";
-        // removes hide element to make sure "Wrong is displayed"
         corrWrongEl.classList.remove("hide")
         // need more efficient way of doing this. 
         time--;
@@ -94,19 +74,13 @@ function selectAnswer(event) {
     }
     nextButton.classList.remove("hide");
     nextButton.addEventListener("click", nextQuestion);
-    // adds index to draw next question in array
-
 }
 
 function nextQuestion() {
     questionIndex++;
-    // console.log("This is the question index:" + questionIndex);
-    // hides the next button
     nextButton.classList.add("hide");
-    //hides the "Correct!"/"Wrong!" text
     corrWrongEl.classList.add("hide");
     showQuestion();
-    // if you answer all questions - end game 
     if (questionIndex >= 4) {
         return endGame();
     }
@@ -120,7 +94,6 @@ function updateTimer() {
     // let seconds =;
     time--;
     counterNum.innerHTML = time;
-    // if time runs out end game
     if (time <= 0) {
         endGame();
     }
@@ -132,7 +105,6 @@ function endGame() {
     nextButton.classList.add("hide");
     endGameForm.classList.remove("hide");
     pushData();
-    // changes text from "Correct!" to "Wrong!"
     endGameForm.children[0].textContent = "You got " + score + " point(s)!";
 
 }
@@ -142,13 +114,19 @@ const pushData =(ev)=>{
     console.log("Push Data has begun");
     // stop from submitting automatically
     // ev.preventDefault(); 
+
+    var initials = input.value.trim();
     //putting score and initials in object
+    if (initials !== "") {
+
+var highScore = JSON.parse(window.localStorage.getItim("highScores")) || [];
     var newScore = {
         heldScore: score,
-        heldInitials: input.value,
-    }
+        heldInitials: initials,
+    };
+
+    
 //pushing new scores into array of high score list. 
-if (input.value !== "") {
 highScoreArr.push(newScore);
 }
 //saving to local storage 
@@ -197,9 +175,8 @@ let questionsArr = [{
         answer: "Salem",
     }
 ]
-// When submit button is clicked, push data to modal
+
 submitBtn.addEventListener("click", pushData);
-// When start button is clicked, start game
 startButtonEl.addEventListener("click", startGame);
 
 
