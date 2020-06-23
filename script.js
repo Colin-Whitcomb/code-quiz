@@ -10,6 +10,7 @@ var nextButton = document.getElementById("next-btn")
 var corrWrongEl = document.getElementById("correct-wrong")
 var submitBtn = document.getElementById("submitButton")
 var input = document.getElementById("input")
+var endGameForm = document.getElementById("endGameForm")
 
 var questionIndex;
 var score;
@@ -33,7 +34,7 @@ function startGame() {
     // set timer to max time
     questionIndex = 0;
     score = 0;
-    timerGlobal= setInterval(updateTimer, 1000);
+    timerGlobal = setInterval(updateTimer, 1000);
     showQuestion();
 
 }
@@ -80,12 +81,13 @@ function selectAnswer(event) {
         time--;
         time--;
     }
-
     nextButton.classList.remove("hide");
+    nextButton.addEventListener("click", nextQuestion);
+    // adds index to draw next question in array
+
 }
 
 function nextQuestion() {
-    // adds index to draw next question in array
     questionIndex++;
     console.log("This is the question index:" + questionIndex);
     // hides the next button
@@ -94,20 +96,20 @@ function nextQuestion() {
     corrWrongEl.classList.add("hide");
     showQuestion();
     // if you answer all questions - end game 
-    // if (questionIndex = 5) {
-    //     endGame ();
-    // }
+    if (questionIndex >= 4) {
+        return endGame ();
+    }
 
 }
-// // total seconds in game
-let time = 10;
+// total seconds in game
+let time = 25;
 
 //Timer function 
 function updateTimer() {
     // let seconds =;
     time--;
     counterNum.innerHTML = time;
-    // if time runs out end game - needs work. 
+    // if time runs out end game
     if (time <= 0) {
         endGame();
     }
@@ -116,76 +118,99 @@ function updateTimer() {
 function endGame() {
     clearInterval(timerGlobal);
     questionContainerEl.classList.add("hide");
-    // nextButton.classList.add("hide");
+    nextButton.classList.add("hide");
+    endGameForm.classList.remove("hide");
+    createHighScoreList();
     // changes text from "Correct!" to "Wrong!"
-    corrWrongEl.children[0].textContent = "You got " + score + " out of 10 points!";
+    endGameForm.children[0].textContent = "You got " + score + " point(s)!";
 
 }
 
-function createHighScoreList () {
-var dataCollected = JSON.parse(window.localStorage.getItem("grabScores")) || [];
-// dataCollected.sort descending order 
-dataCollected.forEach(element => {
-// parse JSON - returned as object {score: initials}
-});
+function createHighScoreList() {
+    var dataCollected = JSON.parse(window.localStorage.getItem("grabScores")) || [];
+    console.log("DC" + dataCollected);
+    // dataCollected.sort
+    dataCollected.sort(function (a, b) {
+        return b - a;
+    });
+    dataCollected.forEach(element => {
+        // parse JSON - returned as object {score: initials}
+    });
 }
 
-function pushHighScore () {
-var initials = input.value.trim();
-if (initials !== "") {
-    var grabScores = JSON.parse(window.localStorage.getItem("getscores")) || [] ;
-    var newScore = {
-        heldScore: score,
-        heldInit: initials
-    };
-    grabScores.push(newScore);
-    window.localStorage.setItem("grabScores", JSON.stringify(grabScores));
-} 
+function pushHighScore() {
+    var initials = input.value.trim();
+    if (initials !== "") {
+        var grabScores = JSON.parse(window.localStorage.getItem("getscores")) || [];
+        var newScore = {
+            heldScore: score,
+            heldInit: initials
+        };
+        grabScores.push(newScore);
+        window.localStorage.setItem("grabScores", JSON.stringify(grabScores));
+    }
 }
 
 
 // array of questions and their corresponding options and answer. 
 let questionsArr = [{
-    question: "What is the capital of South Carolina?",
-    options: ["Raleigh", "Myrtle Beach", "Charleston", "Columbia", ],
-    answer: "Columbia",
-}, {
-    question: "What is the capital of California?",
-    options: ["Sacramento", "Los Angeles", "San Francisco", "San Diego", ],
-    answer: "Sacramento",
-}, {
-    question: "What is the capital of New York?",
-    options: ["NYC", "Buffalo", "Albany", "Rochester", ],
-    answer: "Albany",
-}, {
-    question: "What is the capital of Florida?",
-    options: ["Tampa", "Orlando", "Miami", "Tallahassee", ],
-    answer: "Tallahassee",
-}, {
-    question: "What is the capital of Oregon?",
-    options: ["Portland", "Salem", "Oregon City", "Eugene", ],
-    answer: "Salem",
-}]
+        question: "What is the capital of South Carolina?",
+        options: ["Raleigh", "Myrtle Beach", "Charleston", "Columbia", ],
+        answer: "Columbia",
+    }, {
+        question: "What is the capital of California?",
+        options: ["Sacramento", "Los Angeles", "San Francisco", "San Diego", ],
+        answer: "Sacramento",
+    }, {
+        question: "What is the capital of New York?",
+        options: ["NYC", "Buffalo", "Albany", "Rochester", ],
+        answer: "Albany",
+    }, {
+        question: "What is the capital of Florida?",
+        options: ["Tampa", "Orlando", "Miami", "Tallahassee", ],
+        answer: "Tallahassee",
+    },
+    {
+        question: "What is the capital of Oregon?",
+        options: ["Portland", "Salem", "Oregon City", "Eugene", ],
+        answer: "Salem",
+    }
+]
 
 submitBtn.addEventListener("click", pushHighScore);
 startButtonEl.addEventListener("click", startGame);
-nextButton.addEventListener("click", nextQuestion);
 
-// All done! 
-//     1) Enter Initials
-//     2) Submit button
+// Get the modal
+var modal = document.getElementById("myModal");
 
-// High Scores: 
-//      1) Show IF clicked submit button OR by clicking "View Highschore"
-//      2) "View High Score" needs to be visible on screen
+// Get the button that opens the modal
+var modalBtn = document.getElementById("modalBtn");
 
-// Questions: 
+// Get the <span> element that closes the modal
+var modalSpan = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+modalBtn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+modalSpan.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+// Needs: 
 // 1 - endgame function isn't working
 // when done with questions
 // when out of time
 // 2 - add view score page
 // 3 - only allow 1 answer per question
 // 4 - layout (grid instead of stack); moving up and down
-
-
-
