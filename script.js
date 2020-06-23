@@ -120,36 +120,43 @@ function endGame() {
     questionContainerEl.classList.add("hide");
     nextButton.classList.add("hide");
     endGameForm.classList.remove("hide");
-    createHighScoreList();
+    pushData();
     // changes text from "Correct!" to "Wrong!"
     endGameForm.children[0].textContent = "You got " + score + " point(s)!";
 
 }
 
-function createHighScoreList() {
-    var dataCollected = JSON.parse(window.localStorage.getItem("grabScores")) || [];
-    console.log("DC" + dataCollected);
-    // dataCollected.sort
-    dataCollected.sort(function (a, b) {
-        return b - a;
-    });
-    dataCollected.forEach(element => {
-        // parse JSON - returned as object {score: initials}
-    });
-}
-
-function pushHighScore() {
+function pushData () { 
     var initials = input.value.trim();
-    if (initials !== "") {
-        var grabScores = JSON.parse(window.localStorage.getItem("getscores")) || [];
-        var newScore = {
-            heldScore: score,
-            heldInit: initials
-        };
-        grabScores.push(newScore);
-        window.localStorage.setItem("grabScores", JSON.stringify(grabScores));
-    }
+    modalContent.children[0].textContent = initials;
 }
+//         if (initials !== "") {
+// }
+
+// function createHighScoreList() {
+//     var dataCollected = JSON.parse(window.localStorage.getItem("grabScores")) || [];
+//     console.log("DC" + dataCollected);
+//     // dataCollected.sort
+//     dataCollected.sort(function (a, b) {
+//         return b - a;
+//     });
+//     dataCollected.forEach(element => {
+//         // parse JSON - returned as object {score: initials}
+//     });
+// }
+
+// function pushHighScore() {
+//     var initials = input.value.trim();
+//     if (initials !== "") {
+//         var grabScores = JSON.parse(window.localStorage.getItem("getscores")) || [];
+//         var newScore = {
+//             heldScore: score,
+//             heldInit: initials
+//         };
+//         grabScores.push(newScore);
+//         window.localStorage.setItem("grabScores", JSON.stringify(grabScores));
+//     }
+// }
 
 
 // array of questions and their corresponding options and answer. 
@@ -177,11 +184,13 @@ let questionsArr = [{
     }
 ]
 
-submitBtn.addEventListener("click", pushHighScore);
+submitBtn.addEventListener("click", pushData);
 startButtonEl.addEventListener("click", startGame);
 
 // Get the modal
 var modal = document.getElementById("myModal");
+// Get modal-content
+var modalContent = document.getElementsByClassName("modal-content");
 
 // Get the button that opens the modal
 var modalBtn = document.getElementById("modalBtn");
@@ -192,11 +201,13 @@ var modalSpan = document.getElementsByClassName("close")[0];
 // When the user clicks on the button, open the modal
 modalBtn.onclick = function() {
   modal.style.display = "block";
+//   modal.textContent = "Hello!!!";
 }
 
 // When the user clicks on <span> (x), close the modal
 modalSpan.onclick = function() {
   modal.style.display = "none";
+  modalSpan.textContent = "Hello!!!";
 }
 
 // When the user clicks anywhere outside of the modal, close it

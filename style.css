@@ -9,14 +9,13 @@
 header {
     padding: 0; 
     padding-top: 0;
-    padding-bottom: 10%;
+    padding-bottom: 0;
     margin: 0;
     display: flex;
     width: 100vw;
     height: 10%;
     /* background-color: teal; */
-    
-    
+
 }
 
 body {
@@ -165,10 +164,11 @@ body {
 .modal-content {
     background-color: #fefefe;
     margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
+    padding: 10px;
     border: 1px solid #888;
-    width: 50%; /* Could be more or less, depending on screen size */
-    height: 8%;
+    width: 80%; /* Could be more or less, depending on screen size */
+    /* height: 8%; */
+    color: black;
   }
   
   /* The Close Button */
@@ -177,6 +177,8 @@ body {
     float: right;
     font-size: 28px;
     font-weight: bold;
+    display: absolute;
+    margin-top: -6%;
   }
   
   .close:hover,
