@@ -11,11 +11,13 @@ var corrWrongEl = document.getElementById("correct-wrong")
 var submitBtn = document.getElementById("submitButton")
 var input = document.getElementById("input")
 var endGameForm = document.getElementById("endGameForm")
+var hsArea = document.getElementById("hsArea")
 
 var questionIndex;
 var score;
 var correct;
 var timerGlobal;
+var initials;
 
 // function to strt game - called by clicking Start
 function startGame() {
@@ -125,21 +127,23 @@ function endGame() {
     endGameForm.children[0].textContent = "You got " + score + " point(s)!";
 
 }
+let paraG = hsArea.querySelector('p');
+// paraG.innerHTML = "Test 1"
 
 function pushData () { 
     var initials = input.value.trim();
-    modalContent.children[0].textContent = initials;
+    var tag = document.createElement("p");
+    if (initials !== "") {
+        paraG.innerHTML = initials + ": " + score;
+        // tag.appendChild(text);
+
+    } 
 }
-//         if (initials !== "") {
-// }
 
 // function createHighScoreList() {
 //     var dataCollected = JSON.parse(window.localStorage.getItem("grabScores")) || [];
-//     console.log("DC" + dataCollected);
-//     // dataCollected.sort
-//     dataCollected.sort(function (a, b) {
-//         return b - a;
-//     });
+//  
+
 //     dataCollected.forEach(element => {
 //         // parse JSON - returned as object {score: initials}
 //     });
@@ -154,7 +158,7 @@ function pushData () {
 //             heldInit: initials
 //         };
 //         grabScores.push(newScore);
-//         window.localStorage.setItem("grabScores", JSON.stringify(grabScores));
+//  
 //     }
 // }
 
@@ -183,10 +187,10 @@ let questionsArr = [{
         answer: "Salem",
     }
 ]
-
+// When submit button is clicked, push data to modal
 submitBtn.addEventListener("click", pushData);
+// When start button is clicked, start game
 startButtonEl.addEventListener("click", startGame);
-
 // Get the modal
 var modal = document.getElementById("myModal");
 // Get modal-content
@@ -207,21 +211,18 @@ modalBtn.onclick = function() {
 // When the user clicks on <span> (x), close the modal
 modalSpan.onclick = function() {
   modal.style.display = "none";
-  modalSpan.textContent = "Hello!!!";
+//   modalSpan.textContent = "Hello!!!";
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
+  if (event.target === modal) {
+    modal.style.display = remove("none");
   }
 }
 
 
 // Needs: 
-// 1 - endgame function isn't working
-// when done with questions
-// when out of time
 // 2 - add view score page
 // 3 - only allow 1 answer per question
 // 4 - layout (grid instead of stack); moving up and down
