@@ -44,7 +44,7 @@ body {
 
 .btn-grid {
     display: grid;
-    /* grid-template-columns: auto; */
+    grid-template-columns: auto;
     gap: 10px;
     max-width: 40%;
     margin: 20px 0;
@@ -52,10 +52,10 @@ body {
 
 .btn {
     border: 1px solid white;
-    background-color: rgb(40, 170, 159);
+    background-color: rgb(109, 57, 122);
     color: white;
     border-radius: 5px;
-    padding: 5px, 10px;
+    padding: 10px, 15px;
     outline: none;
 }
 
@@ -78,13 +78,13 @@ body {
     padding: 0;
     margin: 0;
     display: inline; 
-    width: 15vw;
+    width: 25vw;
     height: 8vh;
     justify-content: center;
     align-items: center;
     /* background-color: violet; */
     text-align: center; 
-    position: absolute; left: 10%;
+    position: absolute; left: 8%;
 
 }
 
@@ -121,4 +121,30 @@ body {
     align-items: center;
     text-align: center;
 
+}
+
+.right-wrong {
+    opacity: ;
+}
+
+.endGameForm {
+    padding-top: 5px;
+    margin: 5px;
+    display: flex;
+    width: 50vw;
+    height: 15vh;
+    background-color:  rgb(109, 57, 122);
+    align-items: center;
+    text-align: center;
+    border-radius: 5px;
+    padding: 10px, 15px;
+    border: 1px solid white;
+    /* display: none; */
+}
+
+.formOne {
+    display: absolute
+    ;
+    padding: 5px;
+    margin: 5px;
 }
