@@ -18,6 +18,15 @@ var score;
 var correct;
 var timerGlobal;
 var initials;
+console.log(highScoreArr);
+let producedHS = [];
+
+
+if (localStorage.getItem(highScoreArr) || JSON.parse(localStorage.getItem(highScoreArr).length === 0)) {
+let highScoreArr = [];
+} else {
+    
+}
 
 // function to strt game - called by clicking Start
 function startGame() {
@@ -127,13 +136,8 @@ function endGame() {
     endGameForm.children[0].textContent = "You got " + score + " point(s)!";
 
 }
-// let paraG = hsArea.querySelector('p');
-// paraG.innerHTML = "Test 1"
 
-//array where we will hold all high scores 
-let highScoreArr = [];
-console.log(highScoreArr);
-
+//function to push to local storage 
 const pushData =(ev)=>{
     console.log("Push Data has begun");
     // stop from submitting automatically
@@ -144,48 +148,30 @@ const pushData =(ev)=>{
         heldInitials: input.value,
     }
 //pushing new scores into array of high score list. 
+if (input.value !== "") {
 highScoreArr.push(newScore);
-
-// resetting form 
-// document.querySelector("form").reset();
-
+}
 //saving to local storage 
 localStorage.setItem("High Scores Go Here", JSON.stringify(highScoreArr) );
-
 }
+    
+let producedHS = JSON.parse(localStorage.getItem("newScore"));
+console.log("Produced HS goes here: " + producedHS);
 
-
-    // var tag = document.createElement("p");
-
-//     if (initials !== "") {
-//         paraG.innerHTML = initials + ": " + score;
-//         // tag.appendChild(text);
-
-//     }
-// }
-
-// function createHighScoreList() {
-//     var dataCollected = JSON.parse(window.localStorage.getItem("grabScores")) || [];
-//  
-
-//     dataCollected.forEach(element => {
-//         // parse JSON - returned as object {score: initials}
-//     });
-// }
-
-// function pushHighScore() {
-//     var initials = input.value.trim();
-//     if (initials !== "") {
-//         var grabScores = JSON.parse(window.localStorage.getItem("getscores")) || [];
-//         var newScore = {
-//             heldScore: score,
-//             heldInit: initials
-//         };
-//         grabScores.push(newScore);
-//  
-//     }
-// }
-
+// taking info from local storage and display it 
+function createHighScoreList() {
+    
+// parse from JSON
+    dataCollected.forEach(element => {
+        var dataCollected = JSON.parse(window.localStorage.getItem("producedHS")) || [];
+        // check if worked
+        console.log('This is parsed ' + dataCollected);
+        // write what we collected from JSON in HTML element
+        hsArea.textContent = dataCollected; 
+        // show the high score div in
+        hsArea.classList.remove("hide");
+    });
+}
 
 // array of questions and their corresponding options and answer. 
 let questionsArr = [{
@@ -215,6 +201,8 @@ let questionsArr = [{
 submitBtn.addEventListener("click", pushData);
 // When start button is clicked, start game
 startButtonEl.addEventListener("click", startGame);
+
+
 // Get the modal
 // var modal = document.getElementById("myModal");
 // // Get modal-content
