@@ -22,7 +22,7 @@ var initials;
 // function to strt game - called by clicking Start
 function startGame() {
     // check to see if the function has been called
-    console.log("Game has started");
+    // console.log("Game has started");
     // hide the Welcome to the Code Quiz 
     // display none takes out the empty space 
     openingHeaderEl.style.display = "none";
@@ -59,7 +59,7 @@ function showQuestion() {
 //  function once answer is selected
 function selectAnswer(event) {
     // checking when selectAnswer starts
-    console.log("Answer has been selected");
+    // console.log("Answer has been selected");
     // setting variable for which button is clicked
     var selectedButton = event.target.innerText;
     console.log(selectedButton);
@@ -91,7 +91,7 @@ function selectAnswer(event) {
 
 function nextQuestion() {
     questionIndex++;
-    console.log("This is the question index:" + questionIndex);
+    // console.log("This is the question index:" + questionIndex);
     // hides the next button
     nextButton.classList.add("hide");
     //hides the "Correct!"/"Wrong!" text
@@ -99,7 +99,7 @@ function nextQuestion() {
     showQuestion();
     // if you answer all questions - end game 
     if (questionIndex >= 4) {
-        return endGame ();
+        return endGame();
     }
 
 }
@@ -127,18 +127,42 @@ function endGame() {
     endGameForm.children[0].textContent = "You got " + score + " point(s)!";
 
 }
-let paraG = hsArea.querySelector('p');
+// let paraG = hsArea.querySelector('p');
 // paraG.innerHTML = "Test 1"
 
-function pushData () { 
-    var initials = input.value.trim();
-    var tag = document.createElement("p");
-    if (initials !== "") {
-        paraG.innerHTML = initials + ": " + score;
-        // tag.appendChild(text);
+//array where we will hold all high scores 
+let highScoreArr = [];
+console.log(highScoreArr);
 
-    } 
+const pushData =(ev)=>{
+    console.log("Push Data has begun");
+    // stop from submitting automatically
+    // ev.preventDefault(); 
+    //putting score and initials in object
+    var newScore = {
+        heldScore: score,
+        heldInitials: input.value,
+    }
+//pushing new scores into array of high score list. 
+highScoreArr.push(newScore);
+
+// resetting form 
+// document.querySelector("form").reset();
+
+//saving to local storage 
+localStorage.setItem("High Scores Go Here", JSON.stringify(highScoreArr) );
+
 }
+
+
+    // var tag = document.createElement("p");
+
+//     if (initials !== "") {
+//         paraG.innerHTML = initials + ": " + score;
+//         // tag.appendChild(text);
+
+//     }
+// }
 
 // function createHighScoreList() {
 //     var dataCollected = JSON.parse(window.localStorage.getItem("grabScores")) || [];
@@ -192,35 +216,34 @@ submitBtn.addEventListener("click", pushData);
 // When start button is clicked, start game
 startButtonEl.addEventListener("click", startGame);
 // Get the modal
-var modal = document.getElementById("myModal");
-// Get modal-content
-var modalContent = document.getElementsByClassName("modal-content");
+// var modal = document.getElementById("myModal");
+// // Get modal-content
+// var modalContent = document.getElementsByClassName("modal-content");
 
-// Get the button that opens the modal
-var modalBtn = document.getElementById("modalBtn");
+// // Get the button that opens the modal
+// var modalBtn = document.getElementById("modalBtn");
 
-// Get the <span> element that closes the modal
-var modalSpan = document.getElementsByClassName("close")[0];
+// // Get the <span> element that closes the modal
+// var modalSpan = document.getElementsByClassName("close")[0];
 
-// When the user clicks on the button, open the modal
-modalBtn.onclick = function() {
-  modal.style.display = "block";
-//   modal.textContent = "Hello!!!";
-}
+// // When the user clicks on the button, open the modal
+// modalBtn.onclick = function () {
+//     modal.style.display = "block";
+//     //   modal.textContent = "Hello!!!";
+// }
 
-// When the user clicks on <span> (x), close the modal
-modalSpan.onclick = function() {
-  modal.style.display = "none";
-//   modalSpan.textContent = "Hello!!!";
-}
+// // When the user clicks on <span> (x), close the modal
+// modalSpan.onclick = function () {
+//     modal.style.display = "none";
+//     //   modalSpan.textContent = "Hello!!!";
+// }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target === modal) {
-    modal.style.display = remove("none");
-  }
-}
-
+// // When the user clicks anywhere outside of the modal, close it
+// window.onclick = function (event) {
+//     if (event.target === modal) {
+//         modal.style.display = remove("none");
+//     }
+// }
 
 // Needs: 
 // 2 - add view score page
