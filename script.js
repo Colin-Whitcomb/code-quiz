@@ -26,7 +26,7 @@ var initials;
 // if (localStorage.getItem(highScoreArr) || JSON.parse(localStorage.getItem(highScoreArr).length === 0)) {
 // let highScoreArr = [];
 // } else {
-    
+
 // }
 
 // function to strt game - called by clicking Start
@@ -110,7 +110,7 @@ function endGame() {
 }
 
 //function to push to local storage 
-const pushData =(ev)=>{
+function pushData () {
     console.log("Push Data has begun");
     // stop from submitting automatically
     // ev.preventDefault(); 
@@ -118,99 +118,74 @@ const pushData =(ev)=>{
     var initials = input.value.trim();
     //putting score and initials in object
     if (initials !== "") {
+        // check to see if there are any saved high scores in localStorage
+        var highScores = JSON.parse(window.localStorage.getItim("highScores")) || [];
+        var newScore = {
+            heldScore: score,
+            heldInitials: initials,
+        };
 
-var highScore = JSON.parse(window.localStorage.getItim("highScores")) || [];
-    var newScore = {
-        heldScore: score,
-        heldInitials: initials,
-    };
-
-    
-//pushing new scores into array of high score list. 
-highScoreArr.push(newScore);
-}
-//saving to local storage 
-localStorage.setItem("High Scores Go Here", JSON.stringify(highScoreArr) );
-}
-    
-let producedHS = JSON.parse(localStorage.getItem("newScore"));
-console.log("Produced HS goes here: " + producedHS);
-
-// taking info from local storage and display it 
-function createHighScoreList() {
-    
-// parse from JSON
-    dataCollected.forEach(element => {
-        var dataCollected = JSON.parse(window.localStorage.getItem("producedHS")) || [];
-        // check if worked
-        console.log('This is parsed ' + dataCollected);
-        // write what we collected from JSON in HTML element
-        hsArea.textContent = dataCollected; 
-        // show the high score div in
-        hsArea.classList.remove("hide");
-    });
-}
-
-// array of questions and their corresponding options and answer. 
-let questionsArr = [{
-        question: "What is the capital of South Carolina?",
-        options: ["Raleigh", "Myrtle Beach", "Charleston", "Columbia", ],
-        answer: "Columbia",
-    }, {
-        question: "What is the capital of California?",
-        options: ["Sacramento", "Los Angeles", "San Francisco", "San Diego", ],
-        answer: "Sacramento",
-    }, {
-        question: "What is the capital of New York?",
-        options: ["NYC", "Buffalo", "Albany", "Rochester", ],
-        answer: "Albany",
-    }, {
-        question: "What is the capital of Florida?",
-        options: ["Tampa", "Orlando", "Miami", "Tallahassee", ],
-        answer: "Tallahassee",
-    },
-    {
-        question: "What is the capital of Oregon?",
-        options: ["Portland", "Salem", "Oregon City", "Eugene", ],
-        answer: "Salem",
+        // adding new player in to high score list
+        highScores.push(newScore);
+        localStorage.setItem("highScores" , JSON.stringify(highScores));
+            //redirect to where I want to keep high scores. 
+        }
     }
-]
 
-submitBtn.addEventListener("click", pushData);
-startButtonEl.addEventListener("click", startGame);
+    let producedHS = JSON.parse(localStorage.getItem("newScore"));
+    console.log("Produced HS goes here: " + producedHS);
 
+    // taking info from local storage and display it 
+    function printScores() {
+        var dataCollected = JSON.parse(window.localStorage.getItem("highScores")) || [];
+        // parse from JSON
 
-// Get the modal
-// var modal = document.getElementById("myModal");
-// // Get modal-content
-// var modalContent = document.getElementsByClassName("modal-content");
+        highScores.sort(function (a, b) {
+            return b.score - a.score 
+        });
 
-// // Get the button that opens the modal
-// var modalBtn = document.getElementById("modalBtn");
+        // loop through JSON list 
+        highScores.forEach(function(score) {
+            var player = document.createElement('li');
+            player.textContent = score.initials + ' -- ' + score.score;
 
-// // Get the <span> element that closes the modal
-// var modalSpan = document.getElementsByClassName("close")[0];
+            var winners = document.getElementById("winners"); // NEED the space for me to put this to match ID winners 
+            winnder.appendChild(player);
+        });
 
-// // When the user clicks on the button, open the modal
-// modalBtn.onclick = function () {
-//     modal.style.display = "block";
-//     //   modal.textContent = "Hello!!!";
-// }
+    } 
+    function clearScores() {
+        window.localStorage.removeItem("highScores"); 
+        window.location.reload();
+    }
 
-// // When the user clicks on <span> (x), close the modal
-// modalSpan.onclick = function () {
-//     modal.style.display = "none";
-//     //   modalSpan.textContent = "Hello!!!";
-// }
+    printScores ();
 
-// // When the user clicks anywhere outside of the modal, close it
-// window.onclick = function (event) {
-//     if (event.target === modal) {
-//         modal.style.display = remove("none");
-//     }
-// }
-
-// Needs: 
-// 2 - add view score page
-// 3 - only allow 1 answer per question
-// 4 - layout (grid instead of stack); moving up and down
+    // array of questions and their corresponding options and answer. 
+    let questionsArr = [{
+            question: "What is the capital of South Carolina?",
+            options: ["Raleigh", "Myrtle Beach", "Charleston", "Columbia", ],
+            answer: "Columbia",
+        }, {
+            question: "What is the capital of California?",
+            options: ["Sacramento", "Los Angeles", "San Francisco", "San Diego", ],
+            answer: "Sacramento",
+        }, {
+            question: "What is the capital of New York?",
+            options: ["NYC", "Buffalo", "Albany", "Rochester", ],
+            answer: "Albany",
+        }, {
+            question: "What is the capital of Florida?",
+            options: ["Tampa", "Orlando", "Miami", "Tallahassee", ],
+            answer: "Tallahassee",
+        },
+        {
+            question: "What is the capital of Oregon?",
+            options: ["Portland", "Salem", "Oregon City", "Eugene", ],
+            answer: "Salem",
+        }
+    ]
+// NEED a clear button!! 
+    document.getElementById("clear").onclick = clearScores;
+    submitBtn.addEventListener("click", pushData);
+    startButtonEl.addEventListener("click", startGame);
