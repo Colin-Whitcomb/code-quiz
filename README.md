@@ -16,6 +16,7 @@ ___
 ![Screenshot](./assets/images/ss-1.png)
 
 **Screen shot-2**
+
 ![Screenshot](./assets/images/ss-2.png)
 ___
 ## Technologies / Resources
