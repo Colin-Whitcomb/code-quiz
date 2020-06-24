@@ -11,16 +11,16 @@ var submitBtn = document.getElementById("submitButton")
 var input = document.getElementById("input")
 var endGameForm = document.getElementById("endGameForm")
 var hsArea = document.getElementById("hsArea")
+var hsBtn = document.getElementById("view-highscore")
 // ================================================= //  
 
 // global variables 
-var questionIndex;
+var questionIndex = 0;
 var score;
 var correct;
 var timerGlobal;
 var initials;
 var highScores;
-// var Farley;
 
 // total seconds in game
 let time = 25;
@@ -34,8 +34,6 @@ function updateTimer() {
         endGame();
     }
 }
-
-
 
 // function to start game - called by clicking Start
 function startGame() {
@@ -109,7 +107,6 @@ function endGame() {
 
 //function to push to local storage 
 function pushData() {
-
     var initials = input.value.trim();
     //putting score and initials in object
     if (initials !== "") {
@@ -124,6 +121,7 @@ function pushData() {
         highScores.push(newScore);
         localStorage.setItem("highScores", JSON.stringify(newScore));
         //redirect to where I want to keep high scores. 
+        printScores();
     }
 }
 
@@ -131,20 +129,19 @@ function pushData() {
 function printScores() {
     var highScores = JSON.parse(window.localStorage.getItem("highScores")) || [];
     // parse from JSON
-
     highScores.sort(function (a, b) {
         return b.score - a.score
     });
 
     // loop through JSON list 
     highScores.forEach(function (score) {
+        console.log("for each triggered");
         var player = document.createElement('li');
         player.textContent = score.initials + ' -- ' + score.score;
 
-        var winners = document.getElementById("winners"); // NEED the space for me to put this to match ID winners 
-        winnder.appendChild(player);
+        var winners = document.getElementById("hsArea"); 
+        winners.appendChild(player);
     });
-}
 
 // function clearScores() {
 //     window.localStorage.removeItem("highScores");
@@ -152,7 +149,7 @@ function printScores() {
 // }
 
 printScores();
-
+}
 // array of questions and their corresponding options and answer. 
 let questionsArr = [{
         question: "What is the capital of South Carolina?",
@@ -177,6 +174,7 @@ let questionsArr = [{
         answer: "Salem",
     }
 ]
+
 // NEED a clear button!! 
 // document.getElementById("clear").onclick = clearScores;
 submitBtn.addEventListener("click", pushData);
